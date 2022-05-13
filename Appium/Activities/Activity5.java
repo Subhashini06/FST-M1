@@ -35,15 +35,15 @@ public class Activity5 {
         // Instantiate Appium Driver
         URL appServer = new URL("http://0.0.0.0:4723/wd/hub");
         driver = new AndroidDriver<>(appServer, caps);
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 15);
     }
 
     @Test
     public void smsTest() {
         // Wait for elements to load
-        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AndroidUIAutomator("description(\"Start new conversation\")")));
+        wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AndroidUIAutomator("description(\"Start chat\")")));
         // Locate the button to write a new message and click it
-        driver.findElement(MobileBy.AndroidUIAutomator("description(\"Start new conversation\")")).click();
+        driver.findElement(MobileBy.AndroidUIAutomator("description(\"Start chat\")")).click();
 
         // Enter the number to send message to
         String contactBoxLocator = "resourceId(\"com.google.android.apps.messaging:id/recipient_text_view\")";
