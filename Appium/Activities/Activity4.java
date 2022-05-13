@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 public class Activity4 {
     AndroidDriver<MobileElement> driver;
@@ -32,11 +33,11 @@ public class Activity4 {
         // Instantiate Appium Driver
         URL appServer = new URL("http://0.0.0.0:4723/wd/hub");
         driver = new AndroidDriver<>(appServer, caps);
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 15);
     }
 
     @Test
-    public void addContact() {
+    public void addContact()  {
         // Wait for app to load
         wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Create new contact")));
 
@@ -52,22 +53,22 @@ public class Activity4 {
         MobileElement phoneNumber = driver.findElementByXPath("//android.widget.EditText[@text='Phone']");
 
         // Enter the text in the fields
-        firstName.sendKeys("Aaditya");
-        lastName.sendKeys("Varma");
+        firstName.sendKeys("Shiromit");
+        lastName.sendKeys("Sai");
         phoneNumber.sendKeys("9991284782");
 
         // Save the contact
         driver.findElementById("editor_menu_save_button").click();
 
         // Wait for contact card to appear
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("toolbar_parent")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.id("toolbar_parent")));
 
         // Assertion
         MobileElement mobileCard = driver.findElementById("toolbar_parent");
         Assert.assertTrue(mobileCard.isDisplayed());
 
         String contactName = driver.findElementById("large_title").getText();
-        Assert.assertEquals(contactName, "Aaditya Varma");
+        Assert.assertEquals(contactName, "Shiromit Sai");
     }
 
     @AfterClass
